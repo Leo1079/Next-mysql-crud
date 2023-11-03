@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="bg-blue-500 p-4">
       <ul className="flex space-x-4">
         <li>
-          <Link href="/products">
+          <Link href="/">
             <p className="text-white">Inicio</p>
           </Link>
         </li>

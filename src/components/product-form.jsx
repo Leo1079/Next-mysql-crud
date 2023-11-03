@@ -13,6 +13,7 @@ const ProductForm = () => {
     description: "",
   });
   const [image, setImage] = useState(null);
+  const [disabledButton, setDisableButton] = useState(false);
   const handleChange = (e) => {
     setProduct({
       ...product,
@@ -34,6 +35,9 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Deshabilita el botón al comenzar el envío
+    setDisableButton(true);
+  
     const formData = new FormData();
     formData.append("name", product.name);
     formData.append("price", product.price);
@@ -41,24 +45,34 @@ const ProductForm = () => {
     if (image) {
       formData.append("image", image);
     }
-
-    if (!params.id) {
-      await axios.post("/api/products", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      form.current.reset();
-    } else {
-      const res = await axios.put("/api/products/" + params.id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+  
+    try {
+      if (!params.id) {
+        await axios.post("/api/products", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      } else {
+        const res = await axios.put("/api/products/" + params.id, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+  
+      // Reestablece el botón a habilitado después de completar el envío
+      setDisableButton(false);
+  
+      router.refresh();
+      router.push("/");
+    } catch (error) {
+      // En caso de error, también debes reestablecer el botón a habilitado
+      setDisableButton(false);
+      console.error("Error:", error);
     }
-    router.refresh();
-    router.push("/products");
   };
+  
   return (
     <form
       className="bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4"
@@ -133,6 +147,7 @@ const ProductForm = () => {
       <button
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        disabled = {!disabledButton}
       >
         {params.id ? "Update Product" : "Save Product"}
       </button>
