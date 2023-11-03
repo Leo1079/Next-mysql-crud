@@ -1,3 +1,3 @@
-import newPage from "C:/Users/Leo¿/Desktop/Path-Mern/nextjs-mysql-crud/src/app/new/page";
+import newPage from 'src/app/new/page.jsx';
 
 export default newPage;
