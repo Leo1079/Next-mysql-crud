@@ -13,7 +13,6 @@ const ProductForm = () => {
     description: "",
   });
   const [image, setImage] = useState(null);
-  const [disabledButton, setDisableButton] = useState(false);
   const handleChange = (e) => {
     setProduct({
       ...product,
@@ -35,8 +34,6 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Deshabilita el botón al comenzar el envío
-    setDisableButton(true);
   
     const formData = new FormData();
     formData.append("name", product.name);
@@ -61,14 +58,10 @@ const ProductForm = () => {
         });
       }
   
-      // Reestablece el botón a habilitado después de completar el envío
-      setDisableButton(false);
   
       router.refresh();
       router.push("/");
     } catch (error) {
-      // En caso de error, también debes reestablecer el botón a habilitado
-      setDisableButton(false);
       console.error("Error:", error);
     }
   };
@@ -147,7 +140,6 @@ const ProductForm = () => {
       <button
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        disabled = {!disabledButton}
       >
         {params.id ? "Update Product" : "Save Product"}
       </button>
