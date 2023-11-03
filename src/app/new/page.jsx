@@ -1,4 +1,4 @@
-import ProductForm from "@/components/ProductForm.jsx";
+import ProductForm from "@/components/product-form.jsx";
 
 function FormPage() {
   return (

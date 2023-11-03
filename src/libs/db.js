@@ -11,5 +11,4 @@ export const pool = mysql({
       rejectUnauthorized: false
     }
   },
-
 });
