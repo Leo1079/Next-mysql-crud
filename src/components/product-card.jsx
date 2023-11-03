@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
   return (
     <Link
       href={`/products/${product.id}`}
-      className=" mt-9 block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-3"
+      className=" m-9  block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mb-3"
     >
       {product.image && (
         <img src={product.image} className="w-full rounded-t-lg " alt="" />

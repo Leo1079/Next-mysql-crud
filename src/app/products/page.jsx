@@ -4,7 +4,6 @@ import { pool } from "@/libs/db";
 const loadProducts = async () => {
   try {
     const rows = await pool.query("SELECT * FROM products");
-    console.log(rows)
     return rows;
   } catch (error) {
     console.log(error)
